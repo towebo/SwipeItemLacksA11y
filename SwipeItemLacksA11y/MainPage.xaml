@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SwipeItemLacksA11y.MainPage"
+                          x:Name="thisPage"
+             Title="SwipeItem And A11y"
+             >
+
+    <Grid>
+        <CollectionView x:Name="RowsToPickList" Grid.Row="1"
+                        ItemsSource="{Binding Items}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnRowItemSelected"
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem 
+                                                Text="Tap me"
+                                    BackgroundColor="Red"
+                                                Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.TapMeCommand}"
+                                                CommandParameter="{Binding}"
+                                                />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid Padding="4"
+                                  RowDefinitions="Auto,1"
+                              ColumnDefinitions="1*"
+                              MinimumHeightRequest="100"
+                                  >
+                            <Label Grid.Row="0"
+                                               Text="{Binding Text}"
+                                    />
+                            <BoxView Grid.Row="1"
+                                                 Margin="8,0"
+                                                 BackgroundColor="Black"
+                                             />
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>
